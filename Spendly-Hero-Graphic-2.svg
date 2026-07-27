@@ -52,12 +52,15 @@
   @media (max-width: 645px) {
     .sp-tip  { --sp-x: -370.553px; }
     .sp-conn { display: none; }
-    /* Scroll reveal. The script at the end of this file adds .is-inview to a slab
-       when it crosses the middle of the browser viewport. Gated to this branch so
-       it only ever fires in overlay mode -- pointer devices keep using :hover. */
-    .sp-hover.is-inview .sp-tip  { opacity: 1; transform: translateX(var(--sp-x)); }
-    .sp-hover.is-inview .sp-glow { opacity: 1; }
   }
+
+  /* Scroll reveal. Deliberately NOT inside the breakpoint above. That query keys off
+     the OBJECT's rendered width, which is only tied to the page viewport through the
+     height clamp -- with height:clamp(340px,46vw,661px) it flips at a 1406px viewport,
+     not 991px. The page snippet owns this gate now: it knows the real viewport, and
+     posts -1 to clear when it is wider than the cutoff. */
+  .sp-hover.is-inview .sp-tip  { opacity: 1; transform: translateX(var(--sp-x)); }
+  .sp-hover.is-inview .sp-glow { opacity: 1; }
 </style>
 <g filter="url(#filter0_d_274_569)">
 <rect width="200" height="200" rx="8" transform="matrix(0.866025 0.5 -0.866025 0.5 184.447 500.957)" fill="#FDBDEB"/>
@@ -417,9 +420,13 @@
     show(d.spendly);
   }, false);
 
-  // Fallback when the page snippet is absent: reveal the middle slab only.
-  // Never reveal all three, which is what the old rootMargin version did.
-  setTimeout(function () { if (!heard) { show(1); } }, 600);
+  // Fallback when the page snippet is absent: reveal the middle slab only, and only
+  // when this object is narrow enough to be in overlay mode. Without that guard a
+  // missing snippet would pin a panel open on desktop, since the .is-inview rules
+  // now live outside the breakpoint. Never reveal all three.
+  setTimeout(function () {
+    if (!heard && window.innerWidth <= 645) { show(1); }
+  }, 600);
 })();
 ]]></script>
 </svg>
