@@ -73,21 +73,23 @@
   .sp-hover.is-inview .sp-glow { opacity: 1; }
 
   /* MOBILE TYPE BUMP. The page snippet posts {mobile:true} when the real viewport
-     is 991px or narrower; panels scale 1.6x about their own centre so box and text
-     grow together -- font-size alone would overflow the fixed 330-wide boxes.
-     Each sp-tip carries an inline transform-origin at its panel centre (measured
-     from the view-box corner at -100,-16, so panel centre x 555 becomes 655).
-     Panels stay slab-centred (--sp-x -370.553 inherited from sp-overlay); the
-     view-box reaches to -100 on the left precisely so the scaled panel and its
-     shadow fit without clipping. Must sit after the sp-overlay block: same
-     specificity, later wins. */
+     is 991px or narrower; panels scale 1.45x so box and text grow together --
+     font-size alone would overflow the fixed 330-wide boxes. The pivot is baked
+     into the transform chain (translate to panel centre, scale, translate back)
+     instead of transform-origin: browsers disagree on whether the view-box
+     reference box sits at the viewBox corner or at user 0,0, and the sandwich
+     needs neither. Panel centre is x 555 with per-panel --sp-cy set inline on
+     each sp-tip. Panels stay slab-centred (--sp-x -370.553 inherited from
+     sp-overlay); the view-box reaches to -100 on the left so the scaled panel
+     and its shadow fit without clipping. Must sit after the sp-overlay block:
+     same specificity, later wins. */
   .sp-mobile .sp-tip {
-    transform: translateX(calc(var(--sp-x) - 14px)) scale(1.6);
+    transform: translateX(calc(var(--sp-x) - 14px)) translate(555px, var(--sp-cy, 0px)) scale(1.45) translate(-555px, calc(-1 * var(--sp-cy, 0px)));
   }
   .sp-mobile .sp-hover:hover .sp-tip,
   .sp-mobile .sp-hover:focus-visible .sp-tip,
   .sp-mobile .sp-hover.is-inview .sp-tip {
-    transform: translateX(var(--sp-x)) scale(1.6);
+    transform: translateX(var(--sp-x)) translate(555px, var(--sp-cy, 0px)) scale(1.45) translate(-555px, calc(-1 * var(--sp-cy, 0px)));
   }
   .sp-mobile .sp-conn { display: none; }
 </style>
@@ -293,7 +295,7 @@
 <g class="sp-hover" tabindex="0">
 <rect class="sp-glow" width="200" height="200" rx="8" transform="matrix(0.866025 0.5 -0.866025 0.5 184.447 8.95686)" fill="#000" filter="url(#sp_inner_blue)"/>
 <path class="sp-hit" d="M184.447 8.957L357.652 108.957V118.957L184.447 218.957L11.242 118.957V108.957Z"/>
-<g class="sp-tip" style="transform-origin:655px 129.957px">
+<g class="sp-tip" style="--sp-cy:113.957px">
 <g class="sp-conn">
 <line x1="357.652" y1="113.957" x2="390" y2="113.957" stroke="#65BEE1" stroke-width="1.5" stroke-opacity="0.75"/>
 <g filter="url(#sp_conn_glow)">
@@ -311,7 +313,7 @@
 <g class="sp-hover" tabindex="0">
 <rect class="sp-glow" width="200" height="200" rx="8" transform="matrix(0.866025 0.5 -0.866025 0.5 184.447 254.957)" fill="#000" filter="url(#sp_inner_purple)"/>
 <path class="sp-hit" d="M184.447 254.957L357.652 354.957V364.957L184.447 464.957L11.242 364.957V354.957Z"/>
-<g class="sp-tip" style="transform-origin:655px 375.957px">
+<g class="sp-tip" style="--sp-cy:359.957px">
 <g class="sp-conn">
 <line x1="357.652" y1="359.957" x2="390" y2="359.957" stroke="#8865E1" stroke-width="1.5" stroke-opacity="0.75"/>
 <g filter="url(#sp_conn_glow)">
@@ -330,7 +332,7 @@
 <g class="sp-hover" tabindex="0">
 <rect class="sp-glow" width="200" height="200" rx="8" transform="matrix(0.866025 0.5 -0.866025 0.5 184.447 500.957)" fill="#000" filter="url(#sp_inner_pink)"/>
 <path class="sp-hit" d="M184.447 500.957L357.652 600.957V610.957L184.447 710.957L11.242 610.957V600.957Z"/>
-<g class="sp-tip" style="transform-origin:655px 621.957px">
+<g class="sp-tip" style="--sp-cy:605.957px">
 <g class="sp-conn">
 <line x1="357.652" y1="605.957" x2="390" y2="605.957" stroke="#E165BE" stroke-width="1.5" stroke-opacity="0.75"/>
 <g filter="url(#sp_conn_glow)">
