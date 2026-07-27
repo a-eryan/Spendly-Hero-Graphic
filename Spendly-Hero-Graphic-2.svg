@@ -3,15 +3,19 @@
   .sp-hover { cursor: pointer; }
   .sp-hover:focus { outline: none; }
   .sp-hit { fill: transparent; }
+  /* --sp-x is the panel's resting home. 0 = beside the slab (default).
+     The overlay breakpoint at the bottom of this block swaps it to slab-centre,
+     so every position rule below is written once and follows automatically. */
   .sp-tip {
+    --sp-x: 0px;
     opacity: 0;
-    transform: translateX(-14px);
+    transform: translateX(calc(var(--sp-x) - 14px));
     transform-box: view-box;
     transition: opacity .3s cubic-bezier(.2,.7,.3,1), transform .3s cubic-bezier(.2,.7,.3,1);
     pointer-events: none;
   }
   .sp-hover:hover .sp-tip,
-  .sp-hover:focus-visible .sp-tip { opacity: 1; transform: translateX(0); }
+  .sp-hover:focus-visible .sp-tip { opacity: 1; transform: translateX(var(--sp-x)); }
   .sp-glow {
     opacity: 0;
     transition: opacity .3s cubic-bezier(.2,.7,.3,1);
@@ -32,9 +36,22 @@
     font-size: 12.5px; font-weight: 700;
   }
   @media (prefers-reduced-motion: reduce) {
-    .sp-tip { transition: opacity .01ms linear; transform: none; }
-    .sp-hover:hover .sp-tip, .sp-hover:focus-visible .sp-tip { transform: none; }
+    .sp-tip { transition: opacity .01ms linear; transform: translateX(var(--sp-x)); }
+    .sp-hover:hover .sp-tip,
+    .sp-hover:focus-visible .sp-tip { transform: translateX(var(--sp-x)); }
     .sp-glow { transition: opacity .01ms linear; }
+  }
+
+  /* OVERLAY MODE. Panels are already centred on their slabs vertically and all share
+     x=560, so one uniform shift of -375.553 lands all three on their slab centre.
+     The dot-and-line connector is meaningless once the panel sits on the slab, so it
+     goes. NB this matches the OBJECT's rendered width, not the page viewport -- an
+     object narrower than this is in overlay mode at every screen size.
+     NB2: keep angle brackets out of this block -- SVG is parsed as XML, so a stray
+     tag-like string in here is read as markup and breaks the whole file. */
+  @media (max-width: 991px) {
+    .sp-tip  { --sp-x: -375.553px; }
+    .sp-conn { display: none; }
   }
 </style>
 <g filter="url(#filter0_d_274_569)">
@@ -237,9 +254,11 @@
 <rect class="sp-glow" width="200" height="200" rx="8" transform="matrix(0.866025 0.5 -0.866025 0.5 184.447 8.95686)" fill="#000" filter="url(#sp_inner_blue)"/>
 <path class="sp-hit" d="M184.447 8.957L357.652 108.957V118.957L184.447 218.957L11.242 118.957V108.957Z"/>
 <g class="sp-tip">
+<g class="sp-conn">
 <line x1="357.652" y1="113.957" x2="400" y2="113.957" stroke="#65BEE1" stroke-width="1.5" stroke-opacity="0.75"/>
 <circle cx="357.652" cy="113.957" r="9" fill="#65BEE1" fill-opacity="0.2"/>
 <circle cx="357.652" cy="113.957" r="4.5" fill="#65BEE1"/>
+</g>
 <rect x="400" y="81" width="320" height="66" rx="10" fill="#BDEBFD" fill-opacity="0.85" stroke="#65BEE1" stroke-opacity="0.5" filter="url(#sp_tip_shadow)"/>
 <text class="sp-title" x="418" y="107" fill="#0B4A63">Procurement</text>
 <text class="sp-body" x="418" y="129" fill="#17627E">Manages Onboarding &amp; Relationships</text>
@@ -251,9 +270,11 @@
 <rect class="sp-glow" width="200" height="200" rx="8" transform="matrix(0.866025 0.5 -0.866025 0.5 184.447 254.957)" fill="#000" filter="url(#sp_inner_purple)"/>
 <path class="sp-hit" d="M184.447 254.957L357.652 354.957V364.957L184.447 464.957L11.242 364.957V354.957Z"/>
 <g class="sp-tip">
+<g class="sp-conn">
 <line x1="357.652" y1="359.957" x2="400" y2="359.957" stroke="#8865E1" stroke-width="1.5" stroke-opacity="0.75"/>
 <circle cx="357.652" cy="359.957" r="9" fill="#8865E1" fill-opacity="0.2"/>
 <circle cx="357.652" cy="359.957" r="4.5" fill="#8865E1"/>
+</g>
 <rect x="400" y="272" width="320" height="176" rx="10" fill="url(#sp_tip_grad_audit)" fill-opacity="0.85" stroke="#8865E1" stroke-opacity="0.5" filter="url(#sp_tip_shadow)"/>
 <text class="sp-title" x="418" y="298" fill="#46248C">Audit</text>
 <text class="sp-body" x="418" y="320" fill="#57359A"><tspan x="418" dy="0">Accounting software reconciles and reports</tspan><tspan x="418" dy="17">what you spent. AP automation pays vendors</tspan><tspan x="418" dy="17">on time. Procurement tools manage vendor</tspan><tspan x="418" dy="17">relationships. Expense management tracks</tspan><tspan x="418" dy="17">what employees spend.</tspan></text>
@@ -266,9 +287,11 @@
 <rect class="sp-glow" width="200" height="200" rx="8" transform="matrix(0.866025 0.5 -0.866025 0.5 184.447 500.957)" fill="#000" filter="url(#sp_inner_pink)"/>
 <path class="sp-hit" d="M184.447 500.957L357.652 600.957V610.957L184.447 710.957L11.242 610.957V600.957Z"/>
 <g class="sp-tip">
+<g class="sp-conn">
 <line x1="357.652" y1="605.957" x2="400" y2="605.957" stroke="#E165BE" stroke-width="1.5" stroke-opacity="0.75"/>
 <circle cx="357.652" cy="605.957" r="9" fill="#E165BE" fill-opacity="0.2"/>
 <circle cx="357.652" cy="605.957" r="4.5" fill="#E165BE"/>
+</g>
 <rect x="400" y="564.5" width="320" height="83" rx="10" fill="#FDBDEB" fill-opacity="0.85" stroke="#E165BE" stroke-opacity="0.5" filter="url(#sp_tip_shadow)"/>
 <text class="sp-title" x="418" y="590.5" fill="#7A1352">Finance</text>
 <text class="sp-body" x="418" y="612.5" fill="#8E2266"><tspan x="418" dy="0">Reconciles &amp; reports spend, automates</tspan><tspan x="418" dy="17">vendor payments</tspan></text>
