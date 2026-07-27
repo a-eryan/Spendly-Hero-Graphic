@@ -25,15 +25,15 @@
   .sp-hover:focus-visible .sp-glow { opacity: 1; }
   .sp-title {
     font-family: system-ui, -apple-system, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
-    font-size: 14px; font-weight: 700; letter-spacing: .01em;
+    font-size: 16px; font-weight: 700; letter-spacing: .01em;
   }
   .sp-body {
     font-family: system-ui, -apple-system, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
-    font-size: 12.5px; font-weight: 500;
+    font-size: 14px; font-weight: 500;
   }
   .sp-body-strong {
     font-family: system-ui, -apple-system, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
-    font-size: 12.5px; font-weight: 700;
+    font-size: 14px; font-weight: 700;
   }
   @media (prefers-reduced-motion: reduce) {
     .sp-tip { transition: opacity .01ms linear; transform: translateX(var(--sp-x)); }
@@ -43,14 +43,14 @@
   }
 
   /* OVERLAY MODE. Panels are already centred on their slabs vertically and all share
-     x=560, so one uniform shift of -375.553 lands all three on their slab centre.
+     x=555, so one uniform shift of -370.553 lands all three on their slab centre.
      The dot-and-line connector is meaningless once the panel sits on the slab, so it
      goes. NB this matches the OBJECT's rendered width, not the page viewport -- an
      object narrower than this is in overlay mode at every screen size.
      NB2: keep angle brackets out of this block -- SVG is parsed as XML, so a stray
      tag-like string in here is read as markup and breaks the whole file. */
-  @media (max-width: 587.23px) {
-    .sp-tip  { --sp-x: -375.553px; }
+  @media (max-width: 626.69px) {
+    .sp-tip  { --sp-x: -370.553px; }
     .sp-conn { display: none; }
   }
 </style>
@@ -184,12 +184,16 @@
 <rect width="41.3653" height="41.3653" transform="matrix(0.866025 0.5 -0.866025 0.5 295.203 87.2742)" fill="url(#pattern2_274_569)"/>
 <path d="M176.626 172.099C175.819 174.49 177.038 177.074 180.267 178.938C183.206 180.635 187.172 181.376 190.988 181.143C191.056 181.528 191.019 181.913 190.812 182.275L190.825 182.267C189.572 184.491 182.807 185.517 180.312 185.731L178.784 185.886C176.57 185.239 174.512 184.382 172.675 183.321C165.759 179.328 163.903 173.535 167.138 168.607C170.689 169.815 173.86 170.984 176.626 172.099ZM200.833 177.489C203.917 179.255 206.151 181.116 207.105 183.035L207.106 183.051L206.481 183.411C199.761 187.291 190.003 188.348 181.56 186.601C184.629 186.238 193.522 184.832 192.647 180.988C192.109 178.677 188.048 175.491 177.051 171.112C174.377 170.049 171.298 168.918 167.773 167.71C163.056 166.099 157.541 164.359 151.084 162.48L151.1 162.483C151.169 162.496 151.46 162.549 151.946 162.642L152.447 162.739C155.131 163.258 161.491 164.541 168.967 166.399C172.149 167.184 175.514 168.074 178.907 169.055C187.08 171.428 195.308 174.3 200.833 177.489ZM206.363 163.871C213.45 167.962 215.215 173.959 211.641 178.962C209.574 176.777 204.63 174.434 202.65 173.546C202.611 171.629 201.317 169.724 198.771 168.254C193.614 165.277 185.3 165.258 180.182 168.213L180.039 168.296L180.052 168.303C177.236 167.489 174.237 166.675 171.042 165.868C170.675 165.777 170.295 165.678 169.929 165.586C170.683 164.954 171.555 164.36 172.531 163.796C181.842 158.42 196.98 158.454 206.363 163.871Z" fill="#003DA6"/>
 <defs>
-<linearGradient id="sp_tip_grad_audit" x1="400" y1="297.5" x2="720" y2="422.5" gradientUnits="userSpaceOnUse">
+<linearGradient id="sp_tip_grad_audit" x1="390" y1="289.957" x2="720" y2="429.957" gradientUnits="userSpaceOnUse">
 <stop stop-color="#FAD5FF"/>
 <stop offset="1" stop-color="#D8CBFD"/>
 </linearGradient>
-<filter id="sp_tip_shadow" x="-20%" y="-40%" width="150%" height="200%" filterUnits="objectBoundingBox">
+<filter id="sp_tip_shadow" x="-25%" y="-45%" width="160%" height="210%" filterUnits="objectBoundingBox">
+<feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#FFFFFF" flood-opacity="0.85"/>
 <feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="#2A1B3D" flood-opacity="0.14"/>
+</filter>
+<filter id="sp_conn_glow" x="-100%" y="-100%" width="300%" height="300%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+<feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#FFFFFF" flood-opacity="0.9"/>
 </filter>
 
 <!-- Flowing "loading" strokes for the connector pillars.
@@ -254,14 +258,14 @@
 <rect class="sp-glow" width="200" height="200" rx="8" transform="matrix(0.866025 0.5 -0.866025 0.5 184.447 8.95686)" fill="#000" filter="url(#sp_inner_blue)"/>
 <path class="sp-hit" d="M184.447 8.957L357.652 108.957V118.957L184.447 218.957L11.242 118.957V108.957Z"/>
 <g class="sp-tip">
-<g class="sp-conn">
-<line x1="357.652" y1="113.957" x2="400" y2="113.957" stroke="#65BEE1" stroke-width="1.5" stroke-opacity="0.75"/>
+<g class="sp-conn" filter="url(#sp_conn_glow)">
+<line x1="357.652" y1="113.957" x2="390" y2="113.957" stroke="#65BEE1" stroke-width="1.5" stroke-opacity="0.75"/>
 <circle cx="357.652" cy="113.957" r="9" fill="#65BEE1" fill-opacity="0.2"/>
 <circle cx="357.652" cy="113.957" r="4.5" fill="#65BEE1"/>
 </g>
-<rect x="400" y="81" width="320" height="66" rx="10" fill="#BDEBFD" fill-opacity="0.85" stroke="#65BEE1" stroke-opacity="0.5" filter="url(#sp_tip_shadow)"/>
-<text class="sp-title" x="418" y="107" fill="#0B4A63">Procurement</text>
-<text class="sp-body" x="418" y="129" fill="#17627E">Manages Onboarding &amp; Relationships</text>
+<rect x="390" y="76.957" width="330" height="74" rx="10" fill="#BDEBFD" fill-opacity="0.85" stroke="#65BEE1" stroke-opacity="0.5" filter="url(#sp_tip_shadow)"/>
+<text class="sp-title" x="408" y="106" fill="#0B4A63">Procurement</text>
+<text class="sp-body" x="408" y="131" fill="#17627E">Manages Onboarding &amp; Relationships</text>
 </g>
 </g>
 
@@ -270,15 +274,15 @@
 <rect class="sp-glow" width="200" height="200" rx="8" transform="matrix(0.866025 0.5 -0.866025 0.5 184.447 254.957)" fill="#000" filter="url(#sp_inner_purple)"/>
 <path class="sp-hit" d="M184.447 254.957L357.652 354.957V364.957L184.447 464.957L11.242 364.957V354.957Z"/>
 <g class="sp-tip">
-<g class="sp-conn">
-<line x1="357.652" y1="359.957" x2="400" y2="359.957" stroke="#8865E1" stroke-width="1.5" stroke-opacity="0.75"/>
+<g class="sp-conn" filter="url(#sp_conn_glow)">
+<line x1="357.652" y1="359.957" x2="390" y2="359.957" stroke="#8865E1" stroke-width="1.5" stroke-opacity="0.75"/>
 <circle cx="357.652" cy="359.957" r="9" fill="#8865E1" fill-opacity="0.2"/>
 <circle cx="357.652" cy="359.957" r="4.5" fill="#8865E1"/>
 </g>
-<rect x="400" y="297.5" width="320" height="125" rx="10" fill="url(#sp_tip_grad_audit)" fill-opacity="0.85" stroke="#8865E1" stroke-opacity="0.5" filter="url(#sp_tip_shadow)"/>
-<text class="sp-title" x="418" y="323.5" fill="#46248C">Audit</text>
-<text class="sp-body" x="418" y="345.5" fill="#57359A"><tspan x="418" dy="0">The gap in the finance stack. No insight into</tspan><tspan x="418" dy="17">accuracy, optimization, or compliance. No</tspan><tspan x="418" dy="17">system continuously audits recurring spend.</tspan></text>
-<text class="sp-body-strong" x="418" y="404.5" fill="#46248C">Spendly fills that gap.</text>
+<rect x="390" y="289.957" width="330" height="140" rx="10" fill="url(#sp_tip_grad_audit)" fill-opacity="0.85" stroke="#8865E1" stroke-opacity="0.5" filter="url(#sp_tip_shadow)"/>
+<text class="sp-title" x="408" y="319" fill="#46248C">Audit</text>
+<text class="sp-body" x="408" y="344" fill="#57359A"><tspan x="408" dy="0">The gap in the finance stack. No insight into</tspan><tspan x="408" dy="19">accuracy, optimization, or compliance. No</tspan><tspan x="408" dy="19">system continuously audits recurring spend.</tspan></text>
+<text class="sp-body-strong" x="408" y="410" fill="#46248C">Spendly fills that gap.</text>
 </g>
 </g>
 
@@ -287,14 +291,14 @@
 <rect class="sp-glow" width="200" height="200" rx="8" transform="matrix(0.866025 0.5 -0.866025 0.5 184.447 500.957)" fill="#000" filter="url(#sp_inner_pink)"/>
 <path class="sp-hit" d="M184.447 500.957L357.652 600.957V610.957L184.447 710.957L11.242 610.957V600.957Z"/>
 <g class="sp-tip">
-<g class="sp-conn">
-<line x1="357.652" y1="605.957" x2="400" y2="605.957" stroke="#E165BE" stroke-width="1.5" stroke-opacity="0.75"/>
+<g class="sp-conn" filter="url(#sp_conn_glow)">
+<line x1="357.652" y1="605.957" x2="390" y2="605.957" stroke="#E165BE" stroke-width="1.5" stroke-opacity="0.75"/>
 <circle cx="357.652" cy="605.957" r="9" fill="#E165BE" fill-opacity="0.2"/>
 <circle cx="357.652" cy="605.957" r="4.5" fill="#E165BE"/>
 </g>
-<rect x="400" y="564.5" width="320" height="83" rx="10" fill="#FDBDEB" fill-opacity="0.85" stroke="#E165BE" stroke-opacity="0.5" filter="url(#sp_tip_shadow)"/>
-<text class="sp-title" x="418" y="590.5" fill="#7A1352">Finance</text>
-<text class="sp-body" x="418" y="612.5" fill="#8E2266"><tspan x="418" dy="0">Reconciles &amp; reports spend, automates</tspan><tspan x="418" dy="17">vendor payments</tspan></text>
+<rect x="390" y="559.457" width="330" height="93" rx="10" fill="#FDBDEB" fill-opacity="0.85" stroke="#E165BE" stroke-opacity="0.5" filter="url(#sp_tip_shadow)"/>
+<text class="sp-title" x="408" y="588.5" fill="#7A1352">Finance</text>
+<text class="sp-body" x="408" y="613.5" fill="#8E2266"><tspan x="408" dy="0">Reconciles &amp; reports spend, automates</tspan><tspan x="408" dy="19">vendor payments</tspan></text>
 </g>
 </g>
 
