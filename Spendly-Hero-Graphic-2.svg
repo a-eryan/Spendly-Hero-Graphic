@@ -49,7 +49,7 @@
      object narrower than this is in overlay mode at every screen size.
      NB2: keep angle brackets out of this block -- SVG is parsed as XML, so a stray
      tag-like string in here is read as markup and breaks the whole file. */
-  @media (max-width: 991px) {
+  @media (max-width: 587.23px) {
     .sp-tip  { --sp-x: -375.553px; }
     .sp-conn { display: none; }
   }
@@ -184,7 +184,7 @@
 <rect width="41.3653" height="41.3653" transform="matrix(0.866025 0.5 -0.866025 0.5 295.203 87.2742)" fill="url(#pattern2_274_569)"/>
 <path d="M176.626 172.099C175.819 174.49 177.038 177.074 180.267 178.938C183.206 180.635 187.172 181.376 190.988 181.143C191.056 181.528 191.019 181.913 190.812 182.275L190.825 182.267C189.572 184.491 182.807 185.517 180.312 185.731L178.784 185.886C176.57 185.239 174.512 184.382 172.675 183.321C165.759 179.328 163.903 173.535 167.138 168.607C170.689 169.815 173.86 170.984 176.626 172.099ZM200.833 177.489C203.917 179.255 206.151 181.116 207.105 183.035L207.106 183.051L206.481 183.411C199.761 187.291 190.003 188.348 181.56 186.601C184.629 186.238 193.522 184.832 192.647 180.988C192.109 178.677 188.048 175.491 177.051 171.112C174.377 170.049 171.298 168.918 167.773 167.71C163.056 166.099 157.541 164.359 151.084 162.48L151.1 162.483C151.169 162.496 151.46 162.549 151.946 162.642L152.447 162.739C155.131 163.258 161.491 164.541 168.967 166.399C172.149 167.184 175.514 168.074 178.907 169.055C187.08 171.428 195.308 174.3 200.833 177.489ZM206.363 163.871C213.45 167.962 215.215 173.959 211.641 178.962C209.574 176.777 204.63 174.434 202.65 173.546C202.611 171.629 201.317 169.724 198.771 168.254C193.614 165.277 185.3 165.258 180.182 168.213L180.039 168.296L180.052 168.303C177.236 167.489 174.237 166.675 171.042 165.868C170.675 165.777 170.295 165.678 169.929 165.586C170.683 164.954 171.555 164.36 172.531 163.796C181.842 158.42 196.98 158.454 206.363 163.871Z" fill="#003DA6"/>
 <defs>
-<linearGradient id="sp_tip_grad_audit" x1="400" y1="272" x2="720" y2="448" gradientUnits="userSpaceOnUse">
+<linearGradient id="sp_tip_grad_audit" x1="400" y1="297.5" x2="720" y2="422.5" gradientUnits="userSpaceOnUse">
 <stop stop-color="#FAD5FF"/>
 <stop offset="1" stop-color="#D8CBFD"/>
 </linearGradient>
@@ -275,10 +275,10 @@
 <circle cx="357.652" cy="359.957" r="9" fill="#8865E1" fill-opacity="0.2"/>
 <circle cx="357.652" cy="359.957" r="4.5" fill="#8865E1"/>
 </g>
-<rect x="400" y="272" width="320" height="176" rx="10" fill="url(#sp_tip_grad_audit)" fill-opacity="0.85" stroke="#8865E1" stroke-opacity="0.5" filter="url(#sp_tip_shadow)"/>
-<text class="sp-title" x="418" y="298" fill="#46248C">Audit</text>
-<text class="sp-body" x="418" y="320" fill="#57359A"><tspan x="418" dy="0">Accounting software reconciles and reports</tspan><tspan x="418" dy="17">what you spent. AP automation pays vendors</tspan><tspan x="418" dy="17">on time. Procurement tools manage vendor</tspan><tspan x="418" dy="17">relationships. Expense management tracks</tspan><tspan x="418" dy="17">what employees spend.</tspan></text>
-<text class="sp-body-strong" x="418" y="413" fill="#46248C"><tspan x="418" dy="0">None of them verify whether the vendor bill</tspan><tspan x="418" dy="17">is correct.</tspan></text>
+<rect x="400" y="297.5" width="320" height="125" rx="10" fill="url(#sp_tip_grad_audit)" fill-opacity="0.85" stroke="#8865E1" stroke-opacity="0.5" filter="url(#sp_tip_shadow)"/>
+<text class="sp-title" x="418" y="323.5" fill="#46248C">Audit</text>
+<text class="sp-body" x="418" y="345.5" fill="#57359A"><tspan x="418" dy="0">The gap in the finance stack. No insight into</tspan><tspan x="418" dy="17">accuracy, optimization, or compliance. No</tspan><tspan x="418" dy="17">system continuously audits recurring spend.</tspan></text>
+<text class="sp-body-strong" x="418" y="404.5" fill="#46248C">Spendly fills that gap.</text>
 </g>
 </g>
 
