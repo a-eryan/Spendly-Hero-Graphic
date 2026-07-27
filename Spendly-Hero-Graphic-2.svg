@@ -395,24 +395,31 @@
 <script type="text/javascript"><![CDATA[
 (function () {
   var hits = document.querySelectorAll(".sp-hit");
-  if (!hits.length || !("IntersectionObserver" in window)) return;
+  if (!hits.length) { return; }
 
-  // rootMargin -50%/-50% collapses the root to a 1px band across the vertical
-  // middle. Only one slab can straddle a 1px line at a time, so this naturally
-  // gives "whichever slab is centred" without any distance maths.
-  //
-  // This file is loaded cross-origin in an object tag, so it cannot read the
-  // parent page. It does not need to: IntersectionObserver clips through
-  // ancestor frames, so a null root still resolves to the real browser viewport.
-  var io = new IntersectionObserver(function (entries) {
-    for (var i = 0; i < entries.length; i++) {
-      var g = entries[i].target.parentNode;
-      if (entries[i].isIntersecting) { g.classList.add("is-inview"); }
-      else { g.classList.remove("is-inview"); }
+  function show(idx) {
+    for (var i = 0; i < hits.length; i++) {
+      if (i === idx) { hits[i].parentNode.classList.add("is-inview"); }
+      else { hits[i].parentNode.classList.remove("is-inview"); }
     }
-  }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
+  }
 
-  for (var i = 0; i < hits.length; i++) { io.observe(hits[i]); }
+  // Which slab is centred in the browser viewport cannot be worked out from in
+  // here: this file is loaded cross-origin, so rootMargin is ignored on an
+  // implicit IntersectionObserver root, and intersectionRect only exposes a
+  // viewport edge when a slab is actually clipped by it. The page has to tell
+  // us. It posts {spendly: 0|1|2} on scroll; see the Webflow snippet.
+  var heard = false;
+  window.addEventListener("message", function (e) {
+    var d = e.data;
+    if (!d || typeof d.spendly !== "number") { return; }
+    heard = true;
+    show(d.spendly);
+  }, false);
+
+  // Fallback when the page snippet is absent: reveal the middle slab only.
+  // Never reveal all three, which is what the old rootMargin version did.
+  setTimeout(function () { if (!heard) { show(1); } }, 600);
 })();
 ]]></script>
 </svg>
