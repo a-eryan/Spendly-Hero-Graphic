@@ -49,10 +49,20 @@
      object narrower than this is in overlay mode at every screen size.
      NB2: keep angle brackets out of this block -- SVG is parsed as XML, so a stray
      tag-like string in here is read as markup and breaks the whole file. */
+  /* No-JS fallback only. Keys off the OBJECT's width, which tracks the page viewport
+     only through the height clamp -- do not tune this to a viewport number. */
   @media (max-width: 645px) {
     .sp-tip  { --sp-x: -370.553px; }
     .sp-conn { display: none; }
   }
+
+  /* Authoritative mode switch. The page snippet knows the real viewport and sets
+     exactly one of these on the root. Two class names beat the media query above on
+     specificity (0,2,0 vs 0,1,0), so whichever the page picks always wins. */
+  .sp-side .sp-tip     { --sp-x: 0px; }
+  .sp-side .sp-conn    { display: inline; }
+  .sp-overlay .sp-tip  { --sp-x: -370.553px; }
+  .sp-overlay .sp-conn { display: none; }
 
   /* Scroll reveal. Deliberately NOT inside the breakpoint above. That query keys off
      the OBJECT's rendered width, which is only tied to the page viewport through the
@@ -412,10 +422,18 @@
   // implicit IntersectionObserver root, and intersectionRect only exposes a
   // viewport edge when a slab is actually clipped by it. The page has to tell
   // us. It posts {spendly: 0|1|2} on scroll; see the Webflow snippet.
+  var root = document.documentElement;
+  function setMode(overlay) {
+    if (overlay) { root.classList.add("sp-overlay"); root.classList.remove("sp-side"); }
+    else { root.classList.add("sp-side"); root.classList.remove("sp-overlay"); }
+  }
+
   var heard = false;
   window.addEventListener("message", function (e) {
     var d = e.data;
-    if (!d || typeof d.spendly !== "number") { return; }
+    if (!d) { return; }
+    if (typeof d.overlay === "boolean") { setMode(d.overlay); }
+    if (typeof d.spendly !== "number") { return; }
     heard = true;
     show(d.spendly);
   }, false);
